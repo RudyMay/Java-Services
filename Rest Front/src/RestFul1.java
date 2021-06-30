@@ -7,6 +7,7 @@ import java.net.http.HttpResponse;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -24,18 +25,12 @@ public class RestFul1 extends javax.swing.JFrame {
      */
     private HttpClient httpClient = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2).build();
+      
     public RestFul1() {
-                try {
-            initComponents();
-            final HttpRequest requestPosts = HttpRequest.newBuilder()
-                    .GET()
-                    .uri(URI.create("https://jsonplaceholder.typicode.com/posts/"))
-                    .build();
-            final HttpResponse<String> response = httpClient.send(requestPosts, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
-        } catch (IOException | InterruptedException ex) {
-            Logger.getLogger(RestFul1.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       initComponents();
+       TextoRest.setLineWrap(true);
+       TextoRest.setWrapStyleWord(true);
+      
     }
 
     /**
@@ -49,15 +44,39 @@ public class RestFul1 extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TextoRest = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        inputPais = new javax.swing.JTextField();
+        infoPaisbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("RESTFUL1");
+        jLabel1.setText("Frases de Anime");
 
         jButton1.setText("Volver al Menú");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        TextoRest.setColumns(50);
+        TextoRest.setRows(50);
+        jScrollPane1.setViewportView(TextoRest);
+
+        jLabel2.setText("Introduce el nombre del anime que deseas saber sus frases");
+
+        inputPais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputPaisActionPerformed(evt);
+            }
+        });
+
+        infoPaisbtn.setText("Buscar Info");
+        infoPaisbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                infoPaisbtnActionPerformed(evt);
             }
         });
 
@@ -68,21 +87,47 @@ public class RestFul1 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(181, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(62, 62, 62)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(84, 84, 84)
+                                        .addComponent(inputPais, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(100, 100, 100)
+                                        .addComponent(infoPaisbtn))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel2))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(361, 361, 361)
+                        .addComponent(jLabel1)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputPais, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(infoPaisbtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(113, Short.MAX_VALUE))))
         );
 
         pack();
@@ -94,6 +139,29 @@ public class RestFul1 extends javax.swing.JFrame {
         Main main = new Main();
         main.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void inputPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPaisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputPaisActionPerformed
+
+    private void infoPaisbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoPaisbtnActionPerformed
+        // TODO add your handling code here:
+         try {
+            final HttpRequest requestPosts = HttpRequest.newBuilder()
+                    .GET()
+                    .uri(URI.create("https://animechan.vercel.app/api/quotes/anime?title="+ inputPais.getText()))
+                    .build();
+            final HttpResponse<String> response = httpClient.send(requestPosts, HttpResponse.BodyHandlers.ofString());
+              
+            
+           TextoRest.setText(response.body());
+            TextoRest.setEditable(false);
+            
+             
+        } catch (IOException | InterruptedException ex) {
+            Logger.getLogger(RestFul1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_infoPaisbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,7 +199,12 @@ public class RestFul1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea TextoRest;
+    private javax.swing.JButton infoPaisbtn;
+    private javax.swing.JTextField inputPais;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
